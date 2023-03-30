@@ -1,0 +1,1386 @@
+<!-- MIT License
+
+Copyright (c) [2022] [DOMINIC DALE HUGHES]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+ -->
+
+<!-- POLITE DISCLAIMER:
+
+   Don't copy this software then make one or two tiny tweaks 
+   and sell it as your own... this took a lot of work and effort 
+   including the 3rd party people who made the node modules
+   freely acquirable and usable to the public 
+   and I'm very grateful for that; which makes projects like this possible.
+
+   Thank You!
+
+   Further Notice:
+   
+   The MIT license is to respect the gracious 3rd party authors of the node modules 
+   and to allow people freedom to work with this software in any way they choose 
+   without being rude about it (hopefully).
+ -->
+
+ <div class="Linatrix">
+  <!DOCTYPE html>
+  <html lang="en" id="shit">
+    <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Linatrix</title>
+      <script src=""></script>
+      <script src="node_modules/downloadjs/download.js"></script>
+      <script src="node_modules/html-to-image/dist/html-to-image.js"></script>
+      <!-- NEEDS AESTHETIC CLEAN UP/REFORM AND CODE CLEAN UP -->
+    </head>
+    <style>
+      @font-face {
+        font-family: "Play";
+        src: url("fonts/Play-Regular.ttf");
+      }
+
+      @font-face {
+        font-family: "Sportrop";
+        src: url("fonts/SportropRegular.ttf");
+      }
+
+      @font-face {
+        font-family: "Teko";
+        src: url("fonts/Teko-Medium.ttf");
+      }
+
+      @font-face {
+        font-family: Lato;
+        src: url("fonts/Lato-Medium.ttf");
+      }
+
+      .Linatrix {
+        margin-left: auto;
+        margin-right: auto;
+        width: 640px;
+      }
+
+      body {
+        width: auto;
+        height: 100vh;
+        min-height: 100vh;
+        text-align: center;
+        background: radial-gradient(rgb(75, 75, 75), rgb(0, 0, 0)) no-repeat
+          center center fixed;
+        /*     
+      overflow:hidden; */
+        image-rendering: pixelated;
+        
+      }
+
+      ul {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: auto;
+        height: auto;
+      }
+
+      li {
+        margin: 4px;
+        list-style: none;
+        border: 2px solid black;
+        background: rgb(114, 114, 114);
+        padding: 4px;
+        border-radius: 4px;
+      }
+
+      p {
+        font-family: Teko;
+        bottom: 16px;
+        font-size: 1.6em;
+        color: darkgray;
+      }
+
+      /* width */
+      ::-webkit-scrollbar {
+        width: 4px;
+      }
+
+      /* Track */
+      ::-webkit-scrollbar-track {
+        background: rgb(8, 8, 8);
+      }
+
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: radial-gradient(rgb(75, 75, 75), rgb(0, 0, 0));
+      }
+
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+
+      header {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        width: 420px;
+        height: 164px;
+        justify-content: center;
+        align-items: center;
+        top: 4px;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+        background: linear-gradient(rgb(0, 0, 0), rgb(32, 32, 32));
+        background-image: url('img/Linatrix_Header.png');
+        padding: 2px;
+        border-radius: 4px;
+        border: 2px solid rgb(21, 21, 21);
+        filter: drop-shadow(0.0rem 0.0rem 0.4rem rgba(0, 0, 0, 0.5));
+  
+      }
+
+      h1 {
+
+        font-family: Sportrop;
+        font-size: 4.8rem;
+        font-weight: 200;
+        font-smooth: never;
+
+        image-rendering: crisp-edges;
+        margin: 0;
+        margin-top: -8px;
+        background: linear-gradient(rgb(0, 0, 0), rgb(182, 182, 182));
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+   
+        filter: drop-shadow(0.0rem 0.0rem 4px  rgb(0, 0, 0));
+      }
+
+      h3 {
+        margin-top: -32px;
+        padding: 0px;
+        width: auto;
+        height: auto;
+        font-family: Play;
+        font-weight: 400;
+        font-size: 1.6em;
+        background: linear-gradient(rgb(160, 160, 160), rgb(106, 106, 106));
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        filter: drop-shadow(0.0rem 0.0rem 2px rgb(16, 16, 16));
+      }
+
+      article {
+      }
+
+      :root {
+        --pixel-size: 0px;
+        --pixel-gap-size: 0px;
+        --pixel-margin-size: 0px;
+        --pixel-padding-size: 0px;
+        --pixel-column-quantity: 0;
+        --pixel-row-quantity: 0;
+        --pixel-border-size: 0;
+        --pixel-border-radius: 0px;
+        --pixel-color: rgb(80, 80, 80);
+        --line-color: rgb(64, 64, 64);
+        --line-size: 0px;
+        --line-style: ridge;
+        --pixel-grid-margin-top: 0px;
+        --SB-zoom: 50%;
+        --filter: "shit";
+        --Saturate: 100%;
+        --Contrast: 100%;
+        --Brightness: 100%;
+        --GrayScale: 1%;
+        /* 
+      Shape Variables 
+      */
+        /*   --pixel-border-left: var(--line-size) var(--line-style) var(--line-color);
+      --pixel-border-right: var(--line-size) var(--line-style) var(--line-color);
+      --pixel-border-top: var(--line-size) var(--line-style) var(--line-color);
+      --pixel-border-bottom: var(--line-size) var(--line-style) var(--line-color); */
+      }
+
+      .SnapShotBox {
+        position: absolute;
+
+        display: flex;
+
+        top: 200px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: auto;
+        height: 272px;
+        box-shadow: none;
+        transform: scale(var(--SB-zoom));
+      }
+
+      .SnapShot {
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        /* padding 2px */
+        margin-left: auto;
+        margin-right: auto;
+        margin: var(--pixel-grid-margin-top);
+        width: auto;
+        height: auto;
+        box-shadow: none;
+      }
+
+      .Pixel-Grid {
+        position: relative;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: auto;
+        height: auto;
+        margin: auto;
+        display: grid;
+        grid-template:
+          repeat(var(--pixel-row-quantity), var(--pixel-size))
+          /
+          repeat(var(--pixel-column-quantity), var(--pixel-size));
+        grid-auto-rows: var(--pixel-size);
+        grid-auto-columns: var(--pixel-size);
+        gap: var(--pixel-gap-size);
+
+        padding: 8px;
+
+        image-rendering: pixelated;
+        box-shadow: none;
+        filter: var(--filter);
+      }
+
+      .Pixel-Box {
+        position: relative;
+        width: var(--pixel-size);
+        height: var(--pixel-size);
+        outline: var(--line-size) var(--line-style) var(--line-color);
+        border-radius: var(--pixel-border-radius);
+        border-left: var(--pixel-border-left);
+        border-right: var(--pixel-border-right);
+        border-top: var(--pixel-border-top);
+        border-bottom: var(--pixel-border-bottom);
+        background: var(--pixel-color);
+        padding: 2px;
+        image-rendering: pixelated;
+        /*Do not Fuck With This Attribute*/
+        box-shadow: none;
+      }
+
+      .Pixel-Box:hover {
+        position: relative;
+        width: var(--pixel-size);
+        height: var(--pixel-size);
+        outline: var(--line-size) var(--line-style) var(--line-color);
+        border-radius: var(--pixel-border-radius);
+        border-left: var(--pixel-border-left);
+        border-right: var(--pixel-border-right);
+        border-top: var(--pixel-border-top);
+        border-bottom: var(--pixel-border-bottom);
+        background: var(--pixel-color);
+        filter: brightness(160%);
+        padding: 2px;
+        image-rendering: pixelated;
+        /*Do not Fuck With This Attribute*/
+        box-shadow: none;
+      }
+
+      .OptionPanel {
+        position: absolute;
+        text-align: center;
+
+        max-width: auto;
+        width: auto;
+        height: auto;
+        padding: 8px;
+        top: 348px;
+        left: 0;
+        right: 0;
+
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+
+        margin-top: 100px;
+      }
+
+      #Option_Bar {
+        position: relative;
+
+        position: relative;
+        width: auto;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-top: -24px;
+      
+      }
+
+      .LeftSideBar {
+        position: relative;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        grid-template: repeat(1, 1fr) + repeat(1, 1fr);
+
+        width: auto;
+
+        height: 314px;
+        left: -4px;
+        top: 28px;
+        background: radial-gradient(rgb(24, 24, 24), rgb(32, 32, 32));
+        padding: 2px;
+        border-radius: 4px;
+        border: 1px solid rgb(80, 80, 80);
+        box-shadow: 0px 0px 0.24px 0.4px rgb(48, 48, 48);
+          background-image: url('img/MatrixOptionBar.png');
+          background-position: center;
+      }
+
+      .ButtonManager {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 144px;
+        height: auto;
+        justify-content: center;
+        align-items: center;
+        background: radial-gradient(rgb(64, 64, 64) 24%, rgb(24, 24, 24));
+        border: 4px double rgb(48, 48, 48);
+  
+        border-top-left-radius: 0px;
+        border-top-right-radius: 4px;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 2px;
+        padding: 4px;
+        font-size: auto;
+        margin-top: 58px;
+       
+        background-image: url('img/ButtonManagerBar.png');
+        background-position: center;
+        /*  width: 160px; */
+        /*    margin-left: 70px;
+      margin-right: 40px; */
+      }
+
+      #Brightness {
+        -webkit-appearance: none;
+
+        filter: Brightness(var(--Brightness));
+        background: var(--pixel-color);
+        border: 2px inset rgb(80, 80, 80);
+       
+        border-radius: 8px;
+      }
+
+      #Brightness::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 28px;
+        height: 28px;
+        margin-bottom: 4px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+
+        background-image: url("SVG/B_Thumb.svg");
+
+        border: 2px outset rgb(80, 80, 80);
+
+        cursor: grab;
+      }
+
+      #Brightness:hover::-webkit-slider-thumb {
+        filter: brightness(150%);
+      }
+
+      #Contrast {
+        -webkit-appearance: none;
+
+        filter: contrast(var(--Contrast));
+        background: var(--pixel-color);
+        border: 2px inset rgb(56, 56, 56);
+        border-radius: 8px;
+      }
+
+      #Contrast::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 28px;
+        height: 28px;
+        margin-bottom: 4px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        filter: contrast(var(--Contrast));
+
+        background-image: url("SVG/C_Thumb.svg");
+        filter: contrast(var(--Contrast));
+        border: 2px outset rgb(80, 80, 80);
+        cursor: grab;
+      }
+
+      #Contrast:hover::-webkit-slider-thumb {
+        filter: brightness(150%);
+      }
+
+      #saturation {
+        -webkit-appearance: none;
+
+        background: var(--pixel-color);
+        border: 2px inset rgb(34, 34, 34);
+        border-radius: 8px;
+        filter: saturate(var(--Saturation));
+      }
+
+      #Saturation::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 28px;
+        height: 28px;
+        margin-bottom: 4px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+
+        background-image: url("SVG/S_Thumb.svg");
+
+        border: 2px outset rgb(80, 80, 80);
+
+        cursor: grab;
+      }
+
+      #Saturation:hover::-webkit-slider-thumb {
+        filter: brightness(150%);
+      }
+
+      #GrayScale {
+        -webkit-appearance: none;
+
+        background: var(--pixel-color);
+        border: 2px inset rgb(34, 34, 34);
+        border-radius: 8px;
+        filter: GrayScale(var(--GrayScale));
+      }
+
+      #GrayScale::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 28px;
+        height: 28px;
+        margin-bottom: 4px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+
+        background-image: url("SVG/G_Thumb.svg");
+
+        border: 2px outset rgb(80, 80, 80);
+
+        cursor: grab;
+      }
+
+      #GrayScale:hover::-webkit-slider-thumb {
+        filter: brightness(150%);
+      }
+
+      .RightSideBar {
+        position: relative;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        width: 80px;
+
+        height: 316px;
+        right: -4px;
+        top: 28px;
+        background: radial-gradient(rgb(24, 24, 24), rgb(32, 32, 32));
+        padding: 2px;
+        border-radius: 4px;
+        border: 1px solid rgb(64, 64, 64);
+        box-shadow: 0px 0px 0.8px 0.4px rgb(42, 42, 42);
+        background-image: url('img/BarOptionBar.png');
+        background-position: center;
+      }
+
+      input[type="range"] {
+        width: 68px;
+        height: 16px;
+      }
+
+      button {
+        position: relative;
+        background-color: gray;
+        border: 2px ridge darkgray;
+        border-radius: 4px;
+        box-shadow: 0px 0px 2px;
+        padding: 4px;
+        height: auto;
+        width: auto;
+        margin: 0px;
+      }
+
+      .SnapShotBar {
+        position: absolute;
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+
+        top: 814px;
+        left: 0;
+        right: 0;
+        margin-left: 88px;
+        width: auto;
+      }
+
+      .Version-Text {
+        position: relative;
+        text-align: center;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: auto;
+        height: 20px;
+
+        padding: 4px;
+        margin-left: -16px;
+        margin-right: 0px;
+        margin-bottom: 2px;
+        border-radius: 1px;
+        font-family: play;
+        left: -32px;
+        color: darkgray;
+      }
+
+      .URL-Links {
+        position: relative;
+        text-align: center;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        width: 60px;
+        height: 20px;
+
+        padding: 4px;
+
+        margin-left: 24px;
+        margin-bottom: 2px;
+
+        left: -10px;
+      }
+      a {
+        padding-top: 2px;
+        font-family: Lato;
+        font-size: 1.4em;
+        color: gray;
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: rgb(124, 124, 124);
+        cursor: grab;
+      }
+      #SnapShotButton {
+        position: relative;
+        font-family: Teko;
+        font-size: 1.4em;
+        background: linear-gradient(rgb(64, 64, 64), rgb(48, 48, 48));
+        border: 4px double rgb(32, 32, 32);
+        color: gray;
+        margin-left: 4px;
+        width: 160px;
+        height: 32px;
+        padding-bottom: 32px;
+      }
+
+      #SnapShotButton:hover {
+        background: linear-gradient(rgb(80, 80, 80), rgb(64, 64, 64));
+        margin-top: 2px;
+      }
+
+      input {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-family: Teko;
+        font-size: 1em;
+        margin: 2px;
+        border-radius: 2px;
+        box-shadow: 0px 0px 2px rgb(32, 32, 32);
+        padding-top: 6px;
+        padding-bottom: 0px;
+        height: auto;
+        width: 148px;
+      }
+
+      img {
+        grid-row: var(--img-row);
+        grid-column: var(--img-col);
+        background-image: url("https://images.pexels.com/photos/6763439/pexels-photo-6763439.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
+
+        width: var(--pixel-size);
+        height: var(--pixel-size);
+      }
+
+      input::placeholder {
+        filter: brightness(100%);      
+        color: rgb(132, 132, 132);
+      }
+
+      input:hover::placeholder {
+        filter: brightness(140%);
+        color: rgb(164, 164, 164);
+      }
+
+      /* Left Side Bar */
+      .Option {
+      }
+
+      #ColBar {
+        background: linear-gradient(
+          rgb(64, 64, 64) 50%,
+          rgb(48, 48, 48) 100%
+        );
+        border: 2px inset rgb(48, 48, 48);
+        width: 96px;
+        padding-top: 4px;
+        border-radius: 4px;
+        font-size: 1.4em;
+      }
+
+      #ColBar:hover {
+        filter: brightness(80%);
+        background: linear-gradient(rgb(64, 64, 64), rgb(104, 104, 104));
+      }
+
+      #RowBar {
+        background: linear-gradient(
+          rgb(64, 64, 64) 50%,
+          rgb(48, 48, 48) 100%
+        );
+        border: 2px inset rgb(48, 48, 48);
+        padding-top: 4px;
+        width: 96px;
+        border-radius: 4px;
+        font-size: 1.4em;
+      }
+
+      #RowBar:hover {
+        filter: brightness(80%);
+        background: linear-gradient(rgb(64, 64, 64), rgb(104, 104, 104));
+      }
+
+      #AmountOfPixel {
+        background: linear-gradient(
+          rgb(64, 64, 64) 50%,
+          rgb(48, 48, 48) 100%
+        );
+        border: 2px inset rgb(48, 48, 48);
+        padding-top: 4px;
+        width: 96px;
+        font-size: 1em;
+        border-radius: 4px;
+      }
+
+      #AmountOfPixel:hover {
+        filter: brightness(80%);
+        background: linear-gradient(rgb(64, 64, 64), rgb(104, 104, 104));
+      }
+
+      #SetBar {
+        background: linear-gradient(
+          rgb(80, 80, 80) 50%,
+          rgb(64, 64, 64) 100%
+        );
+        
+        border: 2px inset rgb(64, 64, 64);
+        width: 72px;
+        margin: 0 auto;
+        border-radius: 8px;
+        border-style: double;
+        border-width: 4px;
+        color: rgb(24, 24, 24);
+      }
+
+      #SetBar:hover {
+        background: linear-gradient(rgb(64, 64, 64), rgb(48, 48, 48));
+        border: 2px inset rgb(32, 32, 32);
+        width: 72px;
+        margin: 0 auto;
+        border-radius: 8px;
+        border-style: double;
+        border-width: 4px;
+      }
+
+      /* Right Side Bar */
+
+      textarea {
+      }
+      #PixelSizeButton {
+        border-top-right-radius: 8px;
+        border-top-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        border-bottom-left-radius: 8px;
+        background: linear-gradient(darkgray, gray);
+
+      }
+
+      #PixelSizeButton:hover {
+        border-top-right-radius: 8px;
+        border-top-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        border-bottom-left-radius: 8px;
+        background: linear-gradient(gainsboro, gray);
+        border: 4px double gray;
+      }
+
+      #PixelSizeTextArea {
+        background: linear-gradient(rgb(54, 54, 54), rgb(38, 38, 38));
+        border-bottom-color: rgb(54, 54, 54);
+        border-right-color: rgb(34, 34, 34);
+        border-top-color: rgb(54, 54, 54);
+        border-left-color: rgb(46, 46, 46);
+        border-width: 1px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 8px;
+        border-style: solid;
+        filter: opacity(0.98);
+        padding: 6px;
+        padding-top: 8px;
+        color: rgb(208, 208, 208);
+      }
+
+      #PixelSizeTextArea:hover {
+        background: radial-gradient(rgb(32, 32, 32), rgb(42, 42, 42));
+      }
+
+      #PixelColorButton {
+        border-top-right-radius: 4px;
+        border-top-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 4px;
+        background: linear-gradient(darkgray, gray);
+        border: 4px double gray;
+      }
+
+      #PixelColorButton:hover {
+        border-top-right-radius: 4px;
+        border-top-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 4px;
+        background: linear-gradient(gainsboro, gray);
+        border: 4px double gray;
+      }
+
+      #PixelColorTextArea {
+        background: linear-gradient(rgb(54, 54, 54), rgb(38, 38, 38));
+        border-bottom-color: rgb(54, 54, 54);
+        border-right-color: rgb(34, 34, 34);
+        border-top-color: rgb(54, 54, 54);
+        border-left-color: rgb(46, 46, 46);
+        border-width: 1px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 8px;
+        border-style: solid;
+        color: var(--pixel-color);
+        padding: 6px;
+        padding-top: 8px;
+        filter: opacity(0.98);
+        color: rgb(208, 208, 208);
+      }
+
+      #PixelColorTextArea:hover {
+        background: radial-gradient(rgb(32, 32, 32), rgb(42, 42, 42));
+      }
+
+      #PixelRadiusButton {
+        border-top-right-radius: 8px;
+        border-top-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        border-bottom-left-radius: 8px;
+        background: linear-gradient(darkgray, gray);
+        border: 4px double gray;
+      }
+
+      #PixelRadiusButton:hover {
+        border-top-right-radius: 8px;
+        border-top-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        border-bottom-left-radius: 8px;
+        background: linear-gradient(gainsboro, gray);
+        border: 4px double gray;
+      }
+
+      #PixelRadiusTextArea {
+        background: linear-gradient(rgb(54, 54, 54), rgb(38, 38, 38));
+        border-bottom-color: rgb(54, 54, 54);
+        border-right-color: rgb(34, 34, 34);
+        border-top-color: rgb(54, 54, 54);
+        border-left-color: rgb(46, 46, 46);
+        border-width: 1px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 8px;
+        border-style: solid;
+        padding: 6px;
+        padding-top: 8px;
+        filter: opacity(0.98);
+        color: rgb(208, 208, 208);
+      }
+
+      #PixelRadiusTextArea:hover {
+        background: radial-gradient(rgb(32, 32, 32), rgb(42, 42, 42));
+      }
+
+      #GapButton {
+        border-top-right-radius: 4px;
+        border-top-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 4px;
+        background: linear-gradient(darkgray, gray);
+        border: 4px double gray;
+      }
+
+      #GapButton:hover {
+        border-top-right-radius: 4px;
+        border-top-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 4px;
+        background: linear-gradient(gainsboro, gray);
+        border: 4px double gray;
+      }
+
+      #GapSizeTextArea {
+        background: linear-gradient(rgb(54, 54, 54), rgb(38, 38, 38));
+        border-bottom-color: rgb(54, 54, 54);
+        border-right-color: rgb(34, 34, 34);
+        border-top-color: rgb(54, 54, 54);
+        border-left-color: rgb(46, 46, 46);
+        border-width: 1px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 8px;
+        border-style: solid;
+        padding: 6px;
+        padding-top: 8px;
+        filter: opacity(0.98);
+        color: rgb(208, 208, 208);
+      }
+
+      #GapSizeTextArea:hover {
+        background: radial-gradient(rgb(32, 32, 32), rgb(42, 42, 42));
+      }
+
+      #LineColorButton {
+        border-top-right-radius: 8px;
+        border-top-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        border-bottom-left-radius: 8px;
+        background: linear-gradient(darkgray, gray);
+        border: 4px double gray;
+      }
+
+      #LineColorButton:hover {
+        border-top-right-radius: 8px;
+        border-top-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        border-bottom-left-radius: 8px;
+        background: linear-gradient(gainsboro, gray);
+        border: 4px double gray;
+      }
+
+      #LineColorTextArea {
+        background: linear-gradient(rgb(54, 54, 54), rgb(38, 38, 38));
+        border-bottom-color: rgb(54, 54, 54);
+        border-right-color: rgb(34, 34, 34);
+        border-top-color: rgb(54, 54, 54);
+        border-left-color: rgb(46, 46, 46);
+        border-width: 1px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 8px;
+        border-style: solid;
+        color: var(--line-color);
+        filter: opacity(0.98);
+        padding: 6px;
+        padding-top: 8px;
+        color: rgb(208, 208, 208);
+      }
+
+      #LineColorTextArea:hover {
+        background: radial-gradient(rgb(32, 32, 32), rgb(42, 42, 42));
+      }
+
+      #LineStyleButton {
+        border-top-right-radius: 4px;
+        border-top-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 4px;
+        background: linear-gradient(darkgray, gray);
+        border: 4px double gray;
+      }
+
+      #LineStyleButton:hover {
+        border-top-right-radius: 4px;
+        border-top-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 4px;
+        background: linear-gradient(gainsboro, gray);
+        border: 4px double gray;
+      }
+
+      #LineStyleTextArea {
+        background: linear-gradient(rgb(54, 54, 54), rgb(38, 38, 38));
+        border-bottom-color: rgb(54, 54, 54);
+        border-right-color: rgb(34, 34, 34);
+        border-top-color: rgb(54, 54, 54);
+        border-left-color: rgb(46, 46, 46);
+        border-width: 1px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 8px;
+        border-style: solid;
+        filter: opacity(0.98);
+        padding: 6px;
+        padding-top: 8px;
+        color: rgb(208, 208, 208);
+      }
+
+      #LineStyleTextArea:hover {
+        background: radial-gradient(rgb(32, 32, 32), rgb(42, 42, 42));
+      }
+
+
+      #LineSizeTextArea {
+        background: linear-gradient(rgb(54, 54, 54), rgb(38, 38, 38));
+        border-bottom-color: rgb(54, 54, 54);
+        border-right-color: rgb(34, 34, 34);
+        border-top-color: rgb(54, 54, 54);
+        border-left-color: rgb(46, 46, 46);
+        border-width: 1px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 8px;
+        border-style: solid;
+        padding: 6px;
+        padding-top: 8px;
+        filter: opacity(0.98);
+        color: rgb(208, 208, 208);
+      }
+
+      #LineSizeTextArea:hover {
+        background: radial-gradient(rgb(32, 32, 32), rgb(42, 42, 42));
+      }
+
+
+      .Help-Box {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgb(67, 67, 67);
+        border: 4px double black;
+        border-radius: 4px;
+        width: auto;
+        left: 260px;
+        right: 260px;
+        top: 200px;
+        bottom: 400px;
+      }
+    </style>
+    <body>
+      <header>
+        <h1>LINATRIX</h1>
+        <h3>
+          Linear Matrix <br />
+          Generation System
+        </h3>
+      </header>
+      <main>
+      <!--   <div class="Help-Box">
+          <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam illo cupiditate deleniti quae quam explicabo? Repellat nesciunt asperiores assumenda at vero esse. Commodi dolorum maxime adipisci quos vitae libero possimus?</p>
+        </div> -->
+        <article>
+          <div class="SnapShotBox">
+            <div class="SnapShot">
+              <div class="Pixel-Grid">
+                <div class="PixelBox"></div>
+              </div>
+            </div>
+          </div>
+        </article>
+        <div class="OptionPanel">
+          <nav id="Option_Bar">
+            <div class="LeftSideBar">
+              <div class="Option">
+                <input id="ColBar" type="text" placeholder="Column" />
+              </div>
+              <div class="Option">
+                <input id="RowBar" type="text" placeholder="Row" />
+              </div>
+              <div class="Option">
+                <input
+                  id="AmountOfPixel"
+                  type="text"
+                  placeholder="How Many Pixels"
+                />
+              </div>
+              <div class="Option">
+                <input
+                  id="SetBar"
+                  type="button"
+                  value="Set"
+                  onclick="SetLinatrix()"
+                />
+              </div>
+            </div>
+
+            <div class="ButtonManager">
+              <input
+                type="text"
+                name="PixelSize"
+                placeholder="Pixel Size"
+                id="PixelSizeTextArea"
+              />
+              <!--    <input type="button" value=" Pixel Size " id="PixelSizeButton" onclick="SetPixelSize()">
+                     -->
+              <input type="text" name="GapSize" placeholder="Gap Size"
+              id="GapSizeTextArea" "/>
+              <!--      <input type="button" value=" Gap Size " id="GapButton" onclick="SetGapSize()"> -->
+              <input
+                type="text"
+                value=""
+                name="LineSize"
+                placeholder="Line Size"
+                id="LineSizeTextArea"
+              />
+              <!--      <input type="button" value=" Line Size " id="LineSizeButton" onclick="SetLineSize()"> -->
+              <input
+                type="text"
+                name="PixelColor"
+                placeholder="Pixel Color"
+                id="PixelColorTextArea"
+              />
+              <!--    <input type="button" value=" Pixel Color " id="PixelColorButton" onclick="SetPixelColor()"> -->
+              <input
+                type="text"
+                name="LineColor"
+                placeholder="Line Color "
+                id="LineColorTextArea"
+              />
+              <!--     <input type="button" value=" Line Color " id="LineColorButton" onclick="SetLineColor()"> -->
+              <input
+                type="text"
+                name="PixelRadius"
+                placeholder="Pixel Radius"
+                id="PixelRadiusTextArea"
+              />
+              <!--  <input type="button" value=" Pixel Radius " id="PixelRadiusButton"onclick="SetPixelRadius()"> -->
+              <input
+                type="text"
+                value=""
+                name="LineStyle"
+                placeholder="Line Style"
+                id="LineStyleTextArea"
+              />
+              <!--      <input type="button" value=" Line Style " id="LineStyleButton" onclick="SetLineStyle()"> -->
+            </div>
+            <div class="RightSideBar">
+              <input
+                type="range"
+                min="1"
+                max="100"
+                value="100"
+                class="slider"
+                id="Brightness"
+                onchange="Brightness()"
+              />
+              <input
+                type="range"
+                min="1"
+                max="100"
+                value="100"
+                class="slider"
+                id="Contrast"
+                onchange="Contrast()"
+              />
+              <input
+                type="range"
+                min="1"
+                max="100"
+                value="100"
+                class="slider"
+                id="Saturation"
+                onchange="Saturation()"
+              />
+              <input
+                type="range"
+                min="1"
+                max="100"
+                value="0"
+                class="slider"
+                id="GrayScale"
+                onchange="GrayScale()"
+              />
+            </div>
+          </nav>
+        </div>
+      </main>
+      <div class="SnapShotBar">
+        <div class="Version-Text">Line</div>
+        <button id="SnapShotButton" onclick="TakeSnapShot()">SnapShot</button>
+        <div class="URL-Links">
+          <a href="http://www.itch.io"> itch </a>
+        </div>
+      </div>
+    </body>
+    <script>
+      /*   --pixel-size: 64px;
+          --pixel-gap-size: 1px;
+          --pixel-margin-size: 0 auto;
+          --pixel-padding-size: 0px;
+          --pixel-column-quantity: 8;
+          --pixel-row-quantity: 4;
+          --pixel-border-size: 8px;
+          --pixel-border-radius: 0px;
+          --pixel-color: rgb(80, 80, 80);
+          --line-color: rgb(64, 64, 64);
+          --line-size: 4px;
+          --line-style: ridge; */
+      let root = document.documentElement;
+      console.log(root);
+      var PixelGrid = document.querySelector(".Pixel-Grid");
+      var PS = document.getElementById("PixelSizeTextArea");
+      PS.defaultValue = root.style.getPropertyValue("--pixel-size");
+      console.log(root.style.getPropertyValue("--pixel-size"));
+      var PC = document.getElementById("PixelColorTextArea");
+      PC.defaultValue = root.style.getPropertyValue("--pixel-color");
+      var PR = document.getElementById("PixelRadiusTextArea");
+      PR.defaultValue = root.style.getPropertyValue("--pixel-radius");
+      var GS = document.getElementById("GapSizeTextArea");
+      var LC = document.getElementById("LineColorTextArea");
+      var LS = document.getElementById("LineSizeTextArea");
+      var LST = document.getElementById("LineStyleTextArea");
+      var CB = document.getElementById("ColBar");
+      var RB = document.getElementById("RowBar");
+      var AOB = document.getElementById("AmountOfPixel");
+      var Col_Count = 0,
+        Row_Count = 1;
+      var ZoomValue = 100;
+
+      function Brightness() {
+        var BrightAmount = document.querySelector("#Brightness").value;
+        var ContrastAmount = document.querySelector("#Contrast").value;
+        var SaturateAmount = document.querySelector("#Saturation").value;
+        var GrayScaleAmount = document.querySelector("#GrayScale").value;
+        console.log( "Bright_Amount = " + BrightAmount + "%");
+        root.style.setProperty(
+          "--filter",
+          "brightness" + "(" + BrightAmount + "%" + ")" +   "contrast" + "(" + ContrastAmount + "%" + ")" +   "saturate" + "(" + SaturateAmount + "%" + ")" +  "grayscale" + "(" + GrayScaleAmount + "%" + ")" 
+        );
+        root.style.setProperty("--Brightness", BrightAmount + "%");
+        root.style.setProperty("--GrayScale", GrayScaleAmount + "%");
+        root.style.setProperty("--Saturation", SaturateAmount + "%");
+        root.style.setProperty("--Contrast", ContrastAmount + "%");
+      }
+
+      function Contrast() {
+        var BrightAmount = document.querySelector("#Brightness").value;
+        var ContrastAmount = document.querySelector("#Contrast").value;
+        var SaturateAmount = document.querySelector("#Saturation").value;
+        var GrayScaleAmount = document.querySelector("#GrayScale").value;
+        console.log("Contrast_Amount = "  + ContrastAmount + "%");
+        root.style.setProperty(
+          "--filter",
+          "brightness" + "(" + BrightAmount + "%" + ")" +   "contrast" + "(" + ContrastAmount + "%" + ")" +   "saturate" + "(" + SaturateAmount + "%" + ")" +  "grayscale" + "(" + GrayScaleAmount + "%" + ")" 
+        );
+        root.style.setProperty("--Brightness", BrightAmount + "%");
+        root.style.setProperty("--GrayScale", GrayScaleAmount + "%");
+        root.style.setProperty("--Saturation", SaturateAmount + "%");
+        root.style.setProperty("--Contrast", ContrastAmount + "%");
+      }
+
+      function Saturation() {
+        var BrightAmount = document.querySelector("#Brightness").value;
+        var ContrastAmount = document.querySelector("#Contrast").value;
+        var SaturateAmount = document.querySelector("#Saturation").value;
+        var GrayScaleAmount = document.querySelector("#GrayScale").value;
+        console.log("Saturate_Amount = " + SaturateAmount + "%");
+        root.style.setProperty(
+          "--filter",
+          "brightness" + "(" + BrightAmount + "%" + ")" +   "contrast" + "(" + ContrastAmount + "%" + ")" +   "saturate" + "(" + SaturateAmount + "%" + ")" +  "grayscale" + "(" + GrayScaleAmount + "%" + ")" 
+        );
+        root.style.setProperty("--Brightness", BrightAmount + "%");
+        root.style.setProperty("--GrayScale", GrayScaleAmount + "%");
+        root.style.setProperty("--Saturation", SaturateAmount + "%");
+        root.style.setProperty("--Contrast", ContrastAmount + "%");
+      }
+
+      function GrayScale() {
+        var BrightAmount = document.querySelector("#Brightness").value;
+        var ContrastAmount = document.querySelector("#Contrast").value;
+        var SaturateAmount = document.querySelector("#Saturation").value;
+        var GrayScaleAmount = document.querySelector("#GrayScale").value;
+        console.log("GrayScale_Amount = " + GrayScaleAmount + "%");
+        root.style.setProperty(
+          "--filter",
+          "brightness" + "(" + BrightAmount + "%" + ")" +   "contrast" + "(" + ContrastAmount + "%" + ")" +   "saturate" + "(" + SaturateAmount + "%" + ")" +  "grayscale" + "(" + GrayScaleAmount + "%" + ")" 
+        );
+
+        root.style.setProperty("--Brightness", BrightAmount + "%");
+        root.style.setProperty("--GrayScale", GrayScaleAmount + "%");
+        root.style.setProperty("--Saturation", SaturateAmount + "%");
+        root.style.setProperty("--Contrast", ContrastAmount + "%");
+      }
+
+      function SetLinatrix() {
+        PixelGrid.innerHTML = " ";
+        PixelGrid.style.padding = 1 + "px";
+        GS.value = 1;
+        var PixelBox = document.createElement("button");
+        root.style.setProperty("--pixel-column-quantity", CB.value);
+        root.style.setProperty("--pixel-row-quantity", RB.value);
+        root.style.setProperty("--pixel-color", PC.value);
+        root.style.setProperty("--pixel-size", PS.value + "px");
+        root.style.setProperty("--pixel-border-radius", PR.value + "px");
+        root.style.setProperty("--line-color", LC.value);
+        root.style.setProperty("--pixel-gap-size", GS.value + "px");
+        root.style.setProperty("--line-size", LS.value + "px");
+        root.style.setProperty("--line-style", LST.value);
+        root.style.setProperty("--SB-zoom", ZoomValue + "%");
+
+        PixelBox.className = "Pixel-Box";
+        for (var AmountOfBox = 1; AmountOfBox <= AOB.value; AmountOfBox++) {
+          PixelGrid.appendChild(PixelBox.cloneNode());
+        }
+      }
+      var audio = new Audio("Music/Linatrix Fantasy.wav");
+      //audio.play();
+      function TakeSnapShot() {
+        PixelGrid.style.marginTop = 0 + "px";
+
+        PixelGrid.style.padding = LS.value + "px";
+
+        htmlToImage
+          .toPng(document.querySelector(".Pixel-Grid"))
+          .then(function (dataUrl) {
+            download(dataUrl, "spriteheet.png");
+          });
+      }
+
+/*       function ShowAndHideHelpBox() {
+        var HB = document.querySelector('.Help-Box');
+
+        if(HB.style.display === "none")
+        {
+          HB.style.display = "block";
+        } else {
+          HB.style.display = "none";
+        }
+
+      }; */
+
+      document.addEventListener(
+        "keypress",
+        (event) => {
+          var name = event.key;
+          var code = event.code;
+
+          console.log(`Key Pressed ${name} \r\ Key Code Value: ${code}`);
+        /*   
+          if (code == "KeyH") {
+            ShowAndHideHelpBox();
+          } */
+
+          if (code == "NumpadAdd") {
+            ZoomValue += 1;
+            root.style.setProperty("--SB-zoom", ZoomValue + "%");
+            console.log("You Pressed NumPad Add");
+            console.log(ZoomValue);
+          }
+
+          if (code == "NumpadSubtract") {
+            ZoomValue -= 1;
+            root.style.setProperty("--SB-zoom", ZoomValue + "%");
+            console.log("You Pressed NumPad Subtract");
+            console.log(ZoomValue);
+          }
+
+        },
+        false
+      );
+
+      setInterval(function () {
+        root.style.setProperty("--pixel-grid-margin-top", 0 + "px");
+        root.style.setProperty("--pixel-border-radius", PR.value + "px");
+        root.style.setProperty("--pixel-color", PC.value);
+        root.style.setProperty("--pixel-size", PS.value + "px");
+        root.style.setProperty("--pixel-gap-size", GS.value + "px");
+        root.style.setProperty("--line-color", LC.value);
+        root.style.setProperty("--line-style", LST.value);
+        root.style.setProperty("--line-size", LS.value + "px");
+        root.style.setProperty("--SB-zoom", ZoomValue + "%");
+
+        Contrast();
+        Brightness();
+        Saturation();
+        GrayScale();
+      }, 1000 / 120);
+    </script>
+  </html>
+</div>
+
